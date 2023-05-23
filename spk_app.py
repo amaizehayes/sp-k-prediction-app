@@ -29,12 +29,13 @@ df_under = pd.read_csv('spk_under_today.csv')
 df_over = pd.read_csv('spk_over_today.csv')
 df_spk_sim = pd.read_csv('spk_sim.csv')
 
+### over/ under updates
 df_over.rename(columns={'over_diff': 'expected value'}, inplace=True)
 df_under.rename(columns={'under_diff': 'expected value'}, inplace=True)
 
 def to_percent(x):
     x = x
-    return "{:.2%}".format(x)
+    return "{:.1%}".format(x)
 
 over_odds = ['expected value', 'over_odds', 'x_over']
 under_odds = ['expected value', 'under_odds', 'x_under']
@@ -45,10 +46,8 @@ for col in over_odds:
 for col in under_odds:
     df_under[col] = df_under[col].apply(to_percent)
 
-df_over = df_over[['Name', 'Team', 'Opponent', 'xK', 'prop_k', 'expected value', 'over', 'over_odds', 'x_over']]
-df_under = df_under[['Name', 'Team', 'Opponent', 'xK', 'prop_k', 'expected value','under', 'under_odds', 'x_under']]
-
-
+df_over = df_over[['Name', 'Team', 'Opponent', 'xK', 'prop_k', 'over', 'expected value',  'over_odds', 'x_over']]
+df_under = df_under[['Name', 'Team', 'Opponent', 'xK', 'prop_k', 'under', 'expected value', 'under_odds', 'x_under']]
 
 
 # Get the current date and format it as a string
