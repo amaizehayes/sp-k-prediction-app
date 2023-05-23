@@ -29,8 +29,11 @@ df_under = pd.read_csv('spk_under_today.csv')
 df_over = pd.read_csv('spk_over_today.csv')
 df_spk_sim = pd.read_csv('spk_sim.csv')
 
-df_over = df_over[['Name', 'Team', 'Opponent', 'xK', 'prop_k', 'over', 'over_odds', 'x_over', 'over_diff']]
-df_under = df_under[['Name', 'Team', 'Opponent', 'xK', 'prop_k', 'under', 'under_odds', 'x_under', 'under_diff']]
+df_over.rename(columns={'over_diff': 'expected value'}, inplace=True)
+df_under.rename(columns={'under_diff': 'expected value'}, inplace=True)
+
+df_over = df_over[['Name', 'Team', 'Opponent', 'xK', 'prop_k', 'expected value', 'over', 'over_odds', 'x_over']]
+df_under = df_under[['Name', 'Team', 'Opponent', 'xK', 'prop_k', 'expected value','under', 'under_odds', 'x_under']]
 
 # Get the current date and format it as a string
 today = date.today().strftime("%A, %B %d, %Y")
