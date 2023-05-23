@@ -1,0 +1,108 @@
+import pandas as pd
+import numpy as np
+from datetime import date
+import random
+import math
+import seaborn as sns
+import matplotlib.pyplot as plt
+import streamlit as st
+
+st.set_page_config(
+    page_title="Probable Starting Pitcher Strikeouts",
+    # page_icon="🧊",
+    # layout="wide",
+    initial_sidebar_state="expanded",
+    menu_items={
+        # 'Get Help': 'https://www.extremelycoolapp.com/help',
+        # 'Report a bug': "https://www.extremelycoolapp.com/bug",
+        'About': "# SP Strikeouts!"
+    }
+)
+
+tab1, tab2, tab3, tab4 = st.tabs(["Expected Ks", "xK Distribution", "Over/Under Bets", "Most Ks Odds"])
+
+st.set_option('deprecation.showPyplotGlobalUse', False)
+
+df = pd.read_csv('spk_viz_data.csv')
+sp_df = df[['Name', 'Team', 'Handedness', 'Opponent', 'xK', 'prop_k']]
+df_under = pd.read_csv('spk_under_today.csv')
+df_over = pd.read_csv('spk_over_today.csv')
+df_spk_sim = pd.read_csv('spk_sim.csv')
+
+df_over = df_over[['Name', 'Team', 'Opponent', 'xK', 'prop_k', 'over', 'over_odds', 'x_over', 'over_diff']]
+df_under = df_under[['Name', 'Team', 'Opponent', 'xK', 'prop_k', 'under', 'under_odds', 'x_under', 'under_diff']]
+
+# Get the current date and format it as a string
+today = date.today().strftime("%A, %B %d, %Y")
+
+def plot_strikeout_distributions(df, fig_width=8, fig_height=10, n_cols=2):
+    # Define the number of plots
+    n_plots = len(df)
+
+    # Calculate the number of rows needed
+    n_rows = int(math.ceil(n_plots / n_cols))
+
+    # Create the figure and subplots
+    fig, axes = plt.subplots(nrows=n_rows, ncols=n_cols, figsize=(fig_width, fig_height))
+
+    # Flatten the axes array to make it easier to iterate over
+    axes = axes.flatten()
+
+    # Loop through each row in the dataframe and plot the distribution
+    for index, row in df.iterrows():
+        # Get the subplot index for this row
+        plot_index = index % n_plots
+
+        # Plot the distribution for the row
+        ax = sns.lineplot(x=range(len(row['Poisson_0':'Poisson_20'])), y=row['Poisson_0':'Poisson_20'], ax=axes[plot_index])
+        # ax.fill_between(x=range(len(row['Poisson_0':'Poisson_20'])), y1=row['Poisson_0':'Poisson_20'], alpha=0.5)
+
+        # Add vertical lines for xK and prop_k
+        ax.axvline(x=row['xK'], color='red', linestyle='--', label='xK')
+        ax.axvline(x=row['prop_k'], color='black', linestyle='-', label='prop_k')
+
+        # Set the title and axis labels for the subplot
+        ax.set_title(f"{row['Name']} ({row['Team']} vs. {row['Opponent']})")
+        ax.set_ylabel("Probability")
+        ax.set_xlim([0, 17])
+        ax.set_ylim([0, 0.25])
+        sns.despine(ax=ax)
+
+    # Add a master legend
+    handles, labels = ax.get_legend_handles_labels()
+    fig.legend(handles, labels, loc='upper right')
+
+    # Hide any unused subplots
+    for i in range(n_plots, len(axes)):
+        axes[i].set_visible(False)
+
+    # Adjust the spacing between subplots
+    fig.tight_layout()
+    plt.show()
+
+
+def app():
+    with tab1:
+        st.header("Expected Strikeouts (xK)")
+        st.text(f"For games played on {today}")
+        st.dataframe(sp_df, height=700, width=1000)
+    with tab2:
+        st.header("Expected Strikeout Distributions")
+        st.text(f"For games played on {today}")
+        fig = plot_strikeout_distributions(df)
+        st.pyplot(fig)
+
+    with tab3:
+        st.text(f"For games played on {today}")
+        st.subheader("Under Prop Bets")
+        st.dataframe(df_under)
+        st.subheader("Over Prop Bets")
+        st.dataframe(df_over)
+    with tab4:
+        st.header("Most Ks Odds")
+        st.text(f"For games played on {today}")
+        st.dataframe(df_spk_sim)
+
+
+if __name__ == '__main__':
+    app()
