@@ -110,9 +110,7 @@ def app():
     with tab2:
         st.header("Expected Strikeout Distributions")
         st.text(f"For games played on {today}")
-        st.text('A Poisson distribution of the expected number of strikeouts is plotted for each pitcher.')
-        st.text('The red dashed line is the expected number of strikeouts (xK)')
-        st.text('The black line is the prop bet number of strikeouts (prop_k)')
+        st.text('A Poisson distribution plot of the expected number of strikeouts per pitcher')
         fig = plot_strikeout_distributions(df)
         st.pyplot(fig)
 
