@@ -49,6 +49,8 @@ for col in under_odds:
 df_over = df_over[['Name', 'Team', 'Opponent', 'xK', 'prop_k', 'over', 'expected value',  'over_odds', 'x_over']]
 df_under = df_under[['Name', 'Team', 'Opponent', 'xK', 'prop_k', 'under', 'expected value', 'under_odds', 'x_under']]
 
+df_spk_sim['Percent'] = df_spk_sim['Percent'].apply(to_percent)
+df_spk_sim.drop(columns=['Count'], inplace=True)
 
 # Get the current date and format it as a string
 today = date.today().strftime("%A, %B %d, %Y")
@@ -103,15 +105,20 @@ def app():
     with tab1:
         st.header("Expected Strikeouts (xK)")
         st.text(f"For games played on {today}")
+        st.text('The expected number of strikeouts is calculated using pitcher stats and opponent team batting stats. A further explanation is coming.')
         st.dataframe(sp_df, height=700, width=1000)
     with tab2:
         st.header("Expected Strikeout Distributions")
         st.text(f"For games played on {today}")
+        st.text('A Poisson distribution of the expected number of strikeouts is plotted for each pitcher.')
+        st.text('The red dashed line is the expected number of strikeouts (xK)')
+        st.text('The black line is the prop bet number of strikeouts (prop_k)')
         fig = plot_strikeout_distributions(df)
         st.pyplot(fig)
 
     with tab3:
         st.text(f"For games played on {today}")
+        st.text('expected value is the difference between the expected percent likelihood vs. the prop bet percent likelihood')
         st.subheader("Under Prop Bets")
         st.dataframe(df_under)
         st.subheader("Over Prop Bets")
@@ -119,6 +126,8 @@ def app():
     with tab4:
         st.header("Most Ks Odds")
         st.text(f"For games played on {today}")
+        st.text('The odds below are based on 10,000 simulations of the games being played today.')
+        st.text('Moneyline to be fixed for lines that should be negative.')
         st.dataframe(df_spk_sim)
 
 
