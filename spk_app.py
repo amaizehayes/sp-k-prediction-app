@@ -20,7 +20,7 @@ st.set_page_config(
 )
 
 def time_since_last_import():
-    timestamp = os.path.getmtime('spk_sim.csv')
+    timestamp = os.path.getctime('spk_sim.csv')
     last_import = datetime.fromtimestamp(timestamp)
     eastern = pytz.timezone('US/Eastern')
     last_updated_est = eastern.localize(last_import)
