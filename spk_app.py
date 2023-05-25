@@ -1,11 +1,13 @@
 import pandas as pd
 import numpy as np
-from datetime import date
+from datetime import date, datetime
+import pytz
 import random
 import math
 import seaborn as sns
 import matplotlib.pyplot as plt
 import streamlit as st
+import os
 
 st.set_page_config(
     page_title="Probable Starting Pitcher Strikeouts",
@@ -16,6 +18,18 @@ st.set_page_config(
         'About': "# SP Strikeouts! More info to come."
     }
 )
+
+def time_since_last_import():
+    timestamp = os.path.getmtime('spk_viz_data.csv')
+    # last_import = date.fromtimestamp(timestamp)
+    last_import = datetime.fromtimestamp(timestamp)
+    eastern = pytz.timezone('US/Eastern')
+    last_updated_est = eastern.localize(last_import)
+    formatted_datetime = last_updated_est.strftime("%m-%d-%Y %H:%M %Z")
+    # return print(f"The file was last updated on: {formatted_date} at {formatted_datetime}")
+    return formatted_datetime
+
+formatted_datetime = time_since_last_import()
 
 tab1, tab2, tab3, tab4 = st.tabs(["Expected Ks", "xK Distribution", "Over/Under Bets", "Most Ks Odds"])
 
@@ -125,10 +139,11 @@ def app():
     with tab1:
         st.header("Expected Strikeouts (xK)")
         st.text(f"For games played on {today}")
+        st.text(f"Updated: {formatted_datetime}")
         # with st.expander('Why I Made This (Click to Expand)'):
         #     st.write('Juicy deets')
         #     st.markdown(tab1kd)
-        
+
         with st.expander('Glossary & Methodology (Click to Expand)'):
             st.markdown("""
             - **xK**: expected number of strikeouts
@@ -139,20 +154,24 @@ def app():
     with tab2:
         st.header("Expected Strikeout Distributions")
         st.text(f"For games played on {today}")
+        st.text(f"Updated: {formatted_datetime}")
         st.write('A Poisson distribution plot of the expected number of strikeouts per pitcher')
         fig = plot_strikeout_distributions(df)
         st.pyplot(fig)
 
     with tab3:
+        st.header("Over/Under Bets")
         st.text(f"For games played on {today}")
+        st.text(f"Updated: {formatted_datetime}")
         st.write('expected value is the difference between the expected percent likelihood vs. the prop bet percent likelihood')
-        st.subheader("Under Prop Bets")
+        st.subheader("Under Props")
         st.dataframe(df_under)
-        st.subheader("Over Prop Bets")
+        st.subheader("Over Props")
         st.dataframe(df_over)
     with tab4:
         st.header("Most Ks Odds")
         st.text(f"For games played on {today}")
+        st.text(f"Updated: {formatted_datetime}")
         st.write('The odds below are based on 10,000 simulations of the games being played today.')
         st.write('Notice: Moneyline to be fixed for lines that should be negative.')
         st.dataframe(df_spk_sim)
