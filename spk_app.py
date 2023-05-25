@@ -20,13 +20,11 @@ st.set_page_config(
 )
 
 def time_since_last_import():
-    timestamp = os.path.getmtime('spk_viz_data.csv')
-    # last_import = date.fromtimestamp(timestamp)
+    timestamp = os.path.getmtime('spk_sim.csv')
     last_import = datetime.fromtimestamp(timestamp)
     eastern = pytz.timezone('US/Eastern')
     last_updated_est = eastern.localize(last_import)
     formatted_datetime = last_updated_est.strftime("%m-%d-%Y %H:%M %Z")
-    # return print(f"The file was last updated on: {formatted_date} at {formatted_datetime}")
     return formatted_datetime
 
 formatted_datetime = time_since_last_import()
