@@ -13,12 +13,13 @@ import spk_app_dfs
 st.set_page_config(
     page_title="Probable Starting Pitcher Strikeouts",
     page_icon="⚾",
-    layout="wide",
-    initial_sidebar_state="auto",
+    # layout="wide",
+    initial_sidebar_state="collapsed",
     menu_items={
         'About': """# Created by Patrick Hayes
         Visit left hand menu for more information
-        """
+        """,
+        'Report a bug': "mailto:pfhayes@umich.edu",
     }
 )
 st.set_option('deprecation.showPyplotGlobalUse', False)

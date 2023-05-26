@@ -8,7 +8,8 @@ st.set_page_config(
     menu_items={
         'About': """# Created by Patrick Hayes
         Visit left hand menu for more information
-        """
+        """,
+        'Report a bug': "mailto:pfhayes@umich.edu",
     }
 )
 
