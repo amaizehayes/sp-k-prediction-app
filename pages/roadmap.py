@@ -4,9 +4,11 @@ st.set_page_config(
     page_title="SP K Roadmap",
     page_icon="⚾",
     layout="wide",
-    initial_sidebar_state="expanded",
+    initial_sidebar_state="auto",
     menu_items={
-        'About': "# SP Strikeouts! Created by Patrick Hayes"
+        'About': """# Created by Patrick Hayes
+        Visit left hand menu for more information
+        """
     }
 )
 
