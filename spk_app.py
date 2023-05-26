@@ -24,8 +24,7 @@ def time_since_last_import():
     last_import = datetime.fromtimestamp(timestamp)
     eastern = pytz.timezone('US/Eastern')
     last_updated_est = eastern.localize(last_import)
-    updated_minus_4_hours = last_updated_est - timedelta(hours=4)
-    formatted_datetime = updated_minus_4_hours.strftime("%m-%d-%Y %H:%M %Z")
+    formatted_datetime = last_updated_est.strftime("%m-%d-%Y %H:%M %Z")
     return formatted_datetime
 
 formatted_datetime = time_since_last_import()
