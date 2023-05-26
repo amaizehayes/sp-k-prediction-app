@@ -14,9 +14,9 @@ st.set_page_config(
     page_title="Probable Starting Pitcher Strikeouts",
     page_icon="⚾",
     layout="wide",
-    # initial_sidebar_state="expanded",
+    initial_sidebar_state="expanded",
     menu_items={
-        'About': "# SP Strikeouts! More info to come."
+        'About': "# SP Strikeouts! Created by Patrick Hayes"
     }
 )
 st.set_option('deprecation.showPyplotGlobalUse', False)
