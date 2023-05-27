@@ -59,8 +59,8 @@ def app():
 
     with tab1:
         st.header("Expected Strikeouts (xK)")
-        st.text(f"For games played on {today}")
-        st.text(f"Updated: {formatted_datetime}")
+        st.text(f"For games played on {today}. Updated: {formatted_datetime}")
+        st.markdown("""###### *xK now accounts for handedness of the pitcher and the opposing team*""")
         # with st.expander('Why I Made This (Click to Expand)'):
         #     st.write('Juicy deets')
         #     st.markdown(tab1kd)
@@ -74,8 +74,8 @@ def app():
         st.dataframe(sp_df, height=700, width=1000)
     with tab2:
         st.header("Expected Strikeout Distributions")
-        st.text(f"For games played on {today}")
-        st.text(f"Updated: {formatted_datetime}")
+        st.text(f"For games played on {today}. Updated: {formatted_datetime}")
+        st.markdown("""###### *xK now accounts for handedness of the pitcher and the opposing team*""")
         st.write('A Poisson distribution plot of the expected number of strikeouts per pitcher')
         # fig = plot_strikeout_distributions(df)
         fig = plot_strikeout_distributions
@@ -83,8 +83,8 @@ def app():
 
     with tab3:
         st.header("Over/Under Bets")
-        st.text(f"For games played on {today}")
-        st.text(f"Updated: {formatted_datetime}")
+        st.text(f"For games played on {today}. Updated: {formatted_datetime}")
+        st.markdown("""###### *xK now accounts for handedness of the pitcher and the opposing team*""")
         st.write('expected value is the difference between the expected percent likelihood vs. the prop bet percent likelihood')
         st.subheader("Under Props")
         st.dataframe(df_under)
@@ -92,10 +92,10 @@ def app():
         st.dataframe(df_over)
     with tab4:
         st.header("Most Ks Odds")
-        st.text(f"For games played on {today}")
-        st.text(f"Updated: {formatted_datetime}")
+        st.text(f"For games played on {today}. Updated: {formatted_datetime}")
+        st.markdown("""###### *xK now accounts for handedness of the pitcher and the opposing team*""")
         st.write('The odds below are based on 10,000 simulations of the games being played today.')
-        st.write('Notice: Moneyline to be fixed for lines that should be negative.')
+        st.markdown(""" *Notice: Moneyline to be fixed for lines that should be negative*""")
         st.dataframe(df_spk_sim)
 
 
