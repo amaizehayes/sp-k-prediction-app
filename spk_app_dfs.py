@@ -1,5 +1,5 @@
 import pandas as pd
-import numpy as np
+# import numpy as np
 from datetime import date, datetime, timedelta
 import pytz
 import random
@@ -15,19 +15,21 @@ def app_dfs():
         x = x
         return "{:.1%}".format(x)
 
-    def to_pm_est(time_str):
-        datetime_obj = datetime.strptime(time_str, "%Y-%m-%d %H:%M:%S")
-        time_str = datetime_obj.strftime("%H:%M")
-        timezone = pytz.timezone("US/Eastern")
-        converted_time_str = datetime_obj.astimezone(timezone).strftime("%-I:%M %p %Z")
-        return converted_time_str
+    # def to_pm_est(time_str):
+    #     datetime_obj = datetime.strptime(time_str, "%Y-%m-%d %H:%M:%S")
+    #     datetime_obj += datetime.timedelta(hours=4)
+    #     time_str = datetime_obj.strftime("%H:%M")
+    #     timezone = pytz.timezone("US/Eastern")
+    #     converted_time_str = datetime_obj.astimezone(timezone).strftime("%-I:%M %p %Z")
+    #     return converted_time_str
     #imports
     df = pd.read_csv('spk_viz_data.csv')
     sp_df = pd.read_csv('spk_today.csv')
-    sp_df['Game Time'] = sp_df['commence_time'].apply(to_pm_est)
-    sp_df = sp_df[['Name', 'Team', 'Opponent', 'xK', 'prop_k', 'Game Time']]
-    sp_df.sort_values(by=['Game Time'], ascending=True, inplace=True)
-    sp_df.reset_index(drop=True, inplace=True)
+    # sp_df['Game Time'] = sp_df['commence_time'].apply(to_pm_est)
+    sp_df = df[['Name', 'Team', 'Opponent', 'xK', 'prop_k']]
+    # sp_df = sp_df[['Name', 'Team', 'Opponent', 'xK', 'prop_k', 'Game Time']]
+    # sp_df.sort_values(by=['Game Time'], ascending=True, inplace=True)
+    # sp_df.reset_index(drop=True, inplace=True)
     # sp_df['Game Time'] = sp_df['commence_time'].apply(to_pm_est)
 
     df_under = pd.read_csv('spk_under_today.csv')
