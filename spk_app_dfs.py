@@ -18,7 +18,7 @@ def app_dfs():
     def to_pm_est(time_str):
         datetime_obj = datetime.strptime(time_str, "%Y-%m-%d %H:%M:%S")
         time_str = datetime_obj.strftime("%H:%M")
-        timezone = pytz.timezone("EST")
+        timezone = pytz.timezone("US/Eastern")
         converted_time_str = datetime_obj.astimezone(timezone).strftime("%-I:%M %p %Z")
         return converted_time_str
     #imports
