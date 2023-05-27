@@ -10,9 +10,26 @@ import streamlit as st
 import os
 
 def app_dfs():
+
+    def to_percent(x):
+        x = x
+        return "{:.1%}".format(x)
+
+    def to_pm_est(time_str):
+        datetime_obj = datetime.strptime(time_str, "%Y-%m-%d %H:%M:%S")
+        time_str = datetime_obj.strftime("%H:%M")
+        timezone = pytz.timezone("EST")
+        converted_time_str = datetime_obj.astimezone(timezone).strftime("%-I:%M %p %Z")
+        return converted_time_str
     #imports
     df = pd.read_csv('spk_viz_data.csv')
-    sp_df = df[['Name', 'Team', 'Handedness', 'Opponent', 'xK', 'prop_k']]
+    sp_df = pd.read_csv('spk_today.csv')
+    sp_df['Game Time'] = sp_df['commence_time'].apply(to_pm_est)
+    sp_df = sp_df[['Name', 'Team', 'Opponent', 'xK', 'prop_k', 'Game Time']]
+    sp_df.sort_values(by=['Game Time'], ascending=True, inplace=True)
+    sp_df.reset_index(drop=True, inplace=True)
+    # sp_df['Game Time'] = sp_df['commence_time'].apply(to_pm_est)
+
     df_under = pd.read_csv('spk_under_today.csv')
     df_over = pd.read_csv('spk_over_today.csv')
     df_spk_sim = pd.read_csv('spk_sim.csv')
@@ -21,9 +38,6 @@ def app_dfs():
     df_over.rename(columns={'over_diff': 'expected value'}, inplace=True)
     df_under.rename(columns={'under_diff': 'expected value'}, inplace=True)
 
-    def to_percent(x):
-        x = x
-        return "{:.1%}".format(x)
 
     over_odds = ['expected value', 'over_odds', 'x_over']
     under_odds = ['expected value', 'under_odds', 'x_under']
@@ -39,6 +53,7 @@ def app_dfs():
     #sim updates
     df_spk_sim['Percent'] = df_spk_sim['Percent'].apply(to_percent)
     df_spk_sim.drop(columns=['Count'], inplace=True)
+    df_spk_sim.rename(columns={'Percent': 'Probability'}, inplace=True)
 
     def plot_strikeout_distributions(df, fig_width=8, fig_height=10, n_cols=2):
         # Define the number of plots
