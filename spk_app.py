@@ -24,7 +24,7 @@ st.set_page_config(
 )
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
-tab1, tab2, tab3, tab4 = st.tabs(["Expected Ks", "xK Distribution", "Over/Under Bets", "Most Ks Odds"])
+tab1, tab2, tab3, tab4, tab5= st.tabs(["Expected Ks", "xK Distribution", "Over/Under Bets", "Most Ks Odds", "Results"])
 
 def time_since_last_import():
     timestamp = os.path.getmtime('spk_sim.csv')
@@ -102,7 +102,13 @@ def app():
         st.markdown(""" *Notice: Moneyline to be fixed for lines that should be negative*""")
         st.dataframe(df_spk_sim)
 
+    with tab5:
+        st.header("Yesterday's Results")
+        # st.text(f"For games played on {today}")
+        st.text(f"Updated @ {formatted_datetime}")
+        st.dataframe(df_results, height=900)
+
 
 if __name__ == '__main__':
-    df, sp_df, df_under, df_over, df_spk_sim, plot_strikeout_distributions = spk_app_dfs.app_dfs()
+    df, sp_df, df_under, df_over, df_spk_sim, plot_strikeout_distributions, df_results = spk_app_dfs.app_dfs()
     app()

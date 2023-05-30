@@ -35,6 +35,7 @@ def app_dfs():
     df_under = pd.read_csv('spk_under_today.csv')
     df_over = pd.read_csv('spk_over_today.csv')
     df_spk_sim = pd.read_csv('spk_sim.csv')
+    df_results = pd.read_csv('spk_yesterday_results.csv')
 
     ### over/ under updates
     df_over.rename(columns={'over_diff': 'expected value'}, inplace=True)
@@ -102,7 +103,7 @@ def app_dfs():
         fig.tight_layout()
         # plt.show()
 
-    return df, sp_df, df_under, df_over, df_spk_sim, plot_strikeout_distributions(df)
+    return df, sp_df, df_under, df_over, df_spk_sim, plot_strikeout_distributions(df), df_results
 
 if __name__ == '__main__':
     app_dfs()
