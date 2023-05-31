@@ -113,8 +113,8 @@ def combine_scrapes(rg_df, bp_df):
     """
     Combines the RotoGrinders and Baseball Press DataFrames. Outputs 2 csvs.
     """
-    HISTORY_CSV = 'output/probable_starter_history.csv'
-    TODAY_CSV = 'output/probable_starter_today.csv'
+    HISTORY_CSV = 'sp-k-prediction-app/output/probable_starter_history.csv'
+    TODAY_CSV = 'sp-k-prediction-app/output/probable_starter_today.csv'
 
     df = pd.merge(rg_df, bp_df, on='Name', how='left')
 

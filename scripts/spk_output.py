@@ -72,13 +72,13 @@ def merge_data(prob_sp_start, df, fg_sp_data, team_bat_l, team_bat_r, mlb_k_avg_
     return all_merged_df
 
 def load_data_files():
-    avg_ip = pd.read_csv('output/sp_log_2023.csv')['IP'].mean()
-    prob_sp_start = pd.read_csv('output/probable_starter_today.csv')
-    sp_prop = pd.read_csv('output/sp_prop_odds_today.csv')
+    avg_ip = pd.read_csv('sp-k-prediction-app/output/sp_log_2023.csv')['IP'].mean()
+    prob_sp_start = pd.read_csv('sp-k-prediction-app/output/probable_starter_today.csv')
+    sp_prop = pd.read_csv('sp-k-prediction-app/output/sp_prop_odds_today.csv')
     mlb_ids = list(prob_sp_start['mlbid'])
     fg_sp_data = pyb.playerid_reverse_lookup(mlb_ids, key_type='mlbam')
-    df_team_l = pd.read_csv('output/mlb_team_k_vs_l.csv')
-    df_team_r = pd.read_csv('output/mlb_team_k_vs_r.csv')
+    df_team_l = pd.read_csv('sp-k-prediction-app/output/mlb_team_k_vs_l.csv')
+    df_team_r = pd.read_csv('sp-k-prediction-app/output/mlb_team_k_vs_r.csv')
     print('data_files_loaded')
     return avg_ip, prob_sp_start, fg_sp_data, sp_prop, df_team_l, df_team_r
 
@@ -118,7 +118,7 @@ def prop_over_under(all_merged_df, sp_prop):
     prop_ou_df[['x_under', 'x_over']] = prop_ou_df.apply(calculate_sum_poisson_range, axis=1)
     prop_ou_df['xK'] = prop_ou_df['xK'].round(2)
     #output for visualization
-    prop_ou_df.to_csv('spk_viz_data.csv', index=False)
+    prop_ou_df.to_csv('sp-k-prediction-app/spk_viz_data.csv', index=False)
 
     print('over under probabilities calculated')
     return prop_ou_df
@@ -156,11 +156,11 @@ def generate_output_files(df_final):
     df_under = df_under[ucs]
     df_over = df_over[ocs]
 
-    df_final.to_csv('output/spk_today.csv', index=False)
-    df_final.to_csv('output/spk_history.csv', index=False, mode='a', header=False)
+    df_final.to_csv('sp-k-prediction-app/output/spk_today.csv', index=False)
+    df_final.to_csv('sp-k-prediction-app/output/spk_history.csv', index=False, mode='a', header=False)
 
-    df_under.to_csv('spk_under_today.csv', index=False)
-    df_over.to_csv('spk_over_today.csv', index=False)
+    df_under.to_csv('sp-k-prediction-app/spk_under_today.csv', index=False)
+    df_over.to_csv('sp-k-prediction-app/spk_over_today.csv', index=False)
 
     return print('All files written successfully')
 

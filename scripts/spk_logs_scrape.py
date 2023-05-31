@@ -42,7 +42,7 @@ class BaseballScraper:
         temp_df['Date'] = self.date_str
         temp_df['Date'] = pd.to_datetime(temp_df['Date'])
         temp_df['Date'] = temp_df['Date'] - timedelta(days=1)
-        temp_df.to_csv('output/sp_log_2023.csv', index=False, mode='a', header=False)
+        temp_df.to_csv('sp-k-prediction-app/output/sp_log_2023.csv', index=False, mode='a', header=False)
         print(f'{self.date_str} sp scrape done')
 
 if __name__ == '__main__':
