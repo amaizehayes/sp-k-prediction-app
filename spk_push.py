@@ -1,4 +1,7 @@
 from git import Repo
+from datetime import date, datetime
+
+today = date.today().strftime("%A, %B %d, %Y")
 
 def commit_and_push(repo_path, commit_message):
     try:
@@ -22,6 +25,6 @@ def commit_and_push(repo_path, commit_message):
 
 # Example usage
 repo_path = '/home/amaizehayes/sp-k-prediction-app'  # Replace with the path to your repository
-commit_message = 'a test'
+commit_message = f'Data for {today}'
 
 commit_and_push(repo_path, commit_message)
