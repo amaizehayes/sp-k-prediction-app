@@ -24,7 +24,7 @@ def app_dfs():
     #     return converted_time_str
     #imports
     df = pd.read_csv('spk_viz_data.csv')
-    sp_df = pd.read_csv('spk_today.csv')
+    sp_df = pd.read_csv('output/spk_today.csv')
     # sp_df['Game Time'] = sp_df['commence_time'].apply(to_pm_est)
     sp_df = df[['Name', 'Team', 'Opponent', 'xK', 'prop_k']]
     # sp_df = sp_df[['Name', 'Team', 'Opponent', 'xK', 'prop_k', 'Game Time']]
