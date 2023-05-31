@@ -55,7 +55,7 @@ def app():
     """
 
     with tab1:
-        st.header("Expected Strikeouts (xK)")
+        st.header("Starting Pitcher Expected Strikeouts (xK)")
         st.text(f"For games played on {today}")
         st.text(f"Updated @ {formatted_datetime}")
         st.markdown('First time here? Visit <a href="/about" target="_self">About</a> for more information', unsafe_allow_html=True)
@@ -67,7 +67,7 @@ def app():
             st.write('The expected number of strikeouts is calculated using pitcher stats and opponent team batting stats. A further explanation is coming.')
         st.dataframe(sp_df, height=700, width=1000)
     with tab2:
-        st.header("Expected Strikeout Distributions")
+        st.header("SP Expected Strikeout Distributions")
         st.text(f"For games played on {today}")
         st.text(f"Updated @ {formatted_datetime}")
         st.write('A Poisson distribution plot of the expected number of strikeouts per pitcher')
