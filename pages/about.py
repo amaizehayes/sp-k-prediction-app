@@ -35,7 +35,7 @@ def app():
 
     **Roadmap:** Future iterations of the app
 
-    ### Approach Details (deatils a work in progress):
+    ### Approach Details (a work in progress):
     - scrape probable starting pitchers from Rotogrinders and BaseballPress
     - scrape left and right team heandedness batting stats from MLB.com
     - scrape previous day pitcher stat lines from Baseball Reference
