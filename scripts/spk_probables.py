@@ -113,22 +113,22 @@ def combine_scrapes(rg_df, bp_df):
     """
     Combines the RotoGrinders and Baseball Press DataFrames. Outputs 2 csvs.
     """
-    HISTORY_CSV = 'probable_starter_history.csv'
-    TODAY_CSV = 'probable_starter_today.csv'
+    HISTORY_CSV = 'output/probable_starter_history.csv'
+    TODAY_CSV = 'output/probable_starter_today.csv'
 
     df = pd.merge(rg_df, bp_df, on='Name', how='left')
 
     # Write the DataFrame to the history CSV file
-    # try:
-    #     df.to_csv(HISTORY_CSV, index=False, mode='a', header=False)
-    # except Exception as e:
-    #     print(e)
+    try:
+        df.to_csv(HISTORY_CSV, index=False, mode='a', header=False)
+    except Exception as e:
+        print(e)
 
     # # Write the DataFrame to the standalone CSV file
-    # try:
-    #     df.to_csv(TODAY_CSV, index=False, header=True)
-    # except Exception as e:
-    #     print(e)
+    try:
+        df.to_csv(TODAY_CSV, index=False, header=True)
+    except Exception as e:
+        print(e)
 
     return len(df)
 
