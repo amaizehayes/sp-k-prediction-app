@@ -41,9 +41,6 @@ formatted_datetime = time_since_last_import()
 today = date.today().strftime("%A, %B %d, %Y")
 
 def app():
-    # with st.sidebar:
-    #     st.write('test')
-    #### mark down test here
     tab1kd = """
     #### Objective:
     to showcase data science skills in creating a sports analytics app
@@ -61,14 +58,10 @@ def app():
         st.header("Expected Strikeouts (xK)")
         st.text(f"For games played on {today}")
         st.text(f"Updated @ {formatted_datetime}")
-        st.markdown("""###### *xK now accounts for handedness of the pitcher and the opposing team*""")
-        # with st.expander('Why I Made This (Click to Expand)'):
-        #     st.write('Juicy deets')
-        #     st.markdown(tab1kd)
-
+        st.markdown('First time here? Visit <a href="/about" target="_self">About</a> for more information', unsafe_allow_html=True)
         with st.expander('Glossary & Methodology (Click to Expand)'):
             st.markdown("""
-            - **xK**: expected number of strikeouts
+            - **xK**: expected number of strikeouts *(now accounts for handedness of the pitcher and the opposing team)*
             - **prop_k**: FanDuel over / under prop bet for strikeouts
             """)
             st.write('The expected number of strikeouts is calculated using pitcher stats and opponent team batting stats. A further explanation is coming.')
@@ -77,8 +70,13 @@ def app():
         st.header("Expected Strikeout Distributions")
         st.text(f"For games played on {today}")
         st.text(f"Updated @ {formatted_datetime}")
-        st.markdown("""###### *xK now accounts for handedness of the pitcher and the opposing team*""")
         st.write('A Poisson distribution plot of the expected number of strikeouts per pitcher')
+        with st.expander('Glossary & Methodology (Click to Expand)'):
+            st.markdown("""
+            - **Poisson Distribution**: discrete probability distribution that expresses the probability of a given number of events occurring in a fixed interval of time or space if these events occur with a known constant mean rate and independently of the time since the last event
+            - **xK**: expected number of strikeouts *(now accounts for handedness of the pitcher and the opposing team)*
+            - **prop_k**: FanDuel over / under prop bet for strikeouts
+            """)
         # fig = plot_strikeout_distributions(df)
         fig = plot_strikeout_distributions
         st.pyplot(fig)
@@ -87,8 +85,13 @@ def app():
         st.header("Over/Under Bets")
         st.text(f"For games played on {today}")
         st.text(f"Updated @ {formatted_datetime}")
-        st.markdown("""###### *xK now accounts for handedness of the pitcher and the opposing team*""")
-        st.write('expected value is the difference between the expected percent likelihood vs. the prop bet percent likelihood')
+        with st.expander('Glossary & Methodology (Click to Expand)'):
+            st.markdown("""
+            - **Expected Value**: the difference between the expected percent likelihood vs. the prop bet percent likelihood
+            - **xK**: expected number of strikeouts *(now accounts for handedness of the pitcher and the opposing team)*
+            - **prop_k**: FanDuel over / under prop bet for strikeouts
+            - **more to come**
+            """)
         st.subheader("Under Props")
         st.dataframe(df_under)
         st.subheader("Over Props")
@@ -97,15 +100,29 @@ def app():
         st.header("Most Ks Odds")
         st.text(f"For games played on {today}")
         st.text(f"Updated @ {formatted_datetime}")
-        st.markdown("""###### *xK now accounts for handedness of the pitcher and the opposing team*""")
         st.write('The odds below are based on 10,000 simulations of the games being played today.')
-        st.markdown(""" *Notice: Moneyline to be fixed for lines that should be negative*""")
+        with st.expander('Glossary & Methodology (Click to Expand)'):
+            st.markdown("""
+            - **Probability**: the percent likelihood of the pitcher having the most strikeouts out of 10k simulations
+            - **Moneyline**: the moneyline odds for the pitcher to have the most strikeouts in 10k simulations
+            - **more to come**
+            *Notice: Moneyline to be fixed for lines that should be negative*
+            """)
+
         st.dataframe(df_spk_sim)
 
     with tab5:
         st.header("Yesterday's Results")
         # st.text(f"For games played on {today}")
         st.text(f"Updated @ {formatted_datetime}")
+        with st.expander('Glossary & Methodology (Click to Expand)'):
+            st.markdown("""
+            - **xK**: expected number of strikeouts *(now accounts for handedness of the pitcher and the opposing team)*
+            - **prop_k**: FanDuel over / under prop bet for strikeouts
+            - **SO**: the amount of strikeouts a starter pitcher had yesterday
+            - **IP**: the amount of innings pitched a starter pitcher had yesterday
+            - **more to come**
+            """)
         st.dataframe(df_results, height=900)
 
 

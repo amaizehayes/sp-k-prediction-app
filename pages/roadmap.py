@@ -21,11 +21,12 @@ def app():
     #### Future Iterations:
     - ~~use handedness for team strikeouts, requires manual scrape from FanGraphs~~
     - update historical data based on game logs (fix logs for April games)
-    - move scripts to the cloud (AWS/PythonAnywhere/tbd)
+    - ~~move scripts to the cloud via PythonAnywhere~~
     - use a ratio of 2022 and 2023 data for pitchers (use game logs at a future state)
     - fangraphs with -1 for some player ids. need to fix
     - pull in player specific game logs for 2022
     - fix moneyline + sign and remove, from odds
+    - ~~add glossary and methodology for each tab/page~~
     """
     st.header("Roadmap")
     st.markdown(mkdown)
