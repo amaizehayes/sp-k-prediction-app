@@ -52,7 +52,7 @@ if __name__ == '__main__':
   # Simulate a day of baseball and print the results.
   df = simulate_day(10000)
 
-  df.to_csv('spk_sim.csv', index=False, header=True)
+  df.to_csv('sp-k-prediction-app/spk_sim.csv', index=False, header=True)
 
   print(df)
 
