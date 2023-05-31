@@ -1,5 +1,5 @@
 #!/bin/bash
-# python spk_probables.py
+python /scripts/spk_probables.py
 # python team_k_splits.py
 # python spk_logs_scrape.py
 # python spk_odds_api.py
