@@ -56,7 +56,7 @@ def app():
 
     with tab1:
         st.header("Starting Pitcher Expected Strikeouts (xK)")
-        st.text(f"For games played on {today}")
+        st.text(f"For MLB games played on {today}")
         st.text(f"Updated @ {formatted_datetime}")
         st.markdown('First time here? Visit <a href="/about" target="_self">About</a> for more information', unsafe_allow_html=True)
         with st.expander('Glossary & Methodology (Click to Expand)'):
@@ -68,7 +68,7 @@ def app():
         st.dataframe(sp_df, height=700, width=1000)
     with tab2:
         st.header("SP Expected Strikeout Distributions")
-        st.text(f"For games played on {today}")
+        st.text(f"For MLB games played on {today}")
         st.text(f"Updated @ {formatted_datetime}")
         st.write('A Poisson distribution plot of the expected number of strikeouts per pitcher')
         with st.expander('Glossary & Methodology (Click to Expand)'):
@@ -83,7 +83,7 @@ def app():
 
     with tab3:
         st.header("Over/Under Bets")
-        st.text(f"For games played on {today}")
+        st.text(f"For MLB games played on {today}")
         st.text(f"Updated @ {formatted_datetime}")
         with st.expander('Glossary & Methodology (Click to Expand)'):
             st.markdown("""
@@ -98,7 +98,7 @@ def app():
         st.dataframe(df_over)
     with tab4:
         st.header("Most Ks Odds")
-        st.text(f"For games played on {today}")
+        st.text(f"For MLB games played on {today}")
         st.text(f"Updated @ {formatted_datetime}")
         st.write('The odds below are based on 10,000 simulations of the games being played today.')
         with st.expander('Glossary & Methodology (Click to Expand)'):
@@ -112,8 +112,7 @@ def app():
         st.dataframe(df_spk_sim)
 
     with tab5:
-        st.header("Yesterday's Results")
-        # st.text(f"For games played on {today}")
+        st.header("Yesterday's SP K Results")
         st.text(f"Updated @ {formatted_datetime}")
         with st.expander('Glossary & Methodology (Click to Expand)'):
             st.markdown("""
