@@ -27,7 +27,7 @@ st.set_option('deprecation.showPyplotGlobalUse', False)
 tab1, tab2, tab3, tab4, tab5= st.tabs(["Expected Ks", "xK Distribution", "Over/Under Bets", "Most Ks Odds", "Results"])
 
 def time_since_last_import():
-    timestamp = os.path.getmtime('spk_sim.csv')
+    timestamp = os.path.getmtime('output/spk_today.csv')
     last_import = datetime.fromtimestamp(timestamp)
     eastern = pytz.timezone('US/Eastern')
     last_updated_est = eastern.localize(last_import)
