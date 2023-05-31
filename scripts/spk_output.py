@@ -26,7 +26,7 @@ def calculate_avg_ip(df, avg_ip):
     return df
 
 def team_batting_ks(df_team_l, df_team_r):
-    with open('scripts/mlb-dict.json', 'r') as file:
+    with open('sp-k-prediction-app/scripts/mlb-dict.json', 'r') as file:
         mlb_dict = json.load(file)
     df_team_l['Team'] = df_team_l['Team'].map(mlb_dict)
     df_team_r['Team'] = df_team_r['Team'].map(mlb_dict)
