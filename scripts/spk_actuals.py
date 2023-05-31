@@ -36,13 +36,13 @@ def main():
     spk_history = load_data('output/spk_history.csv')
 
     if sp_log is None or spk_history is None:
-        return
+        return print('Nothing getting passed')
 
     # Date manipulation
     today = date.today()
     yesterday = today - timedelta(days=1)
-    today_str = today.strftime('%Y-%m-%d')
-    yesterday_str = yesterday.strftime('%Y-%m-%d')
+    # today_str = today.strftime('%Y-%m-%d')
+    # yesterday_str = yesterday.strftime('%Y-%m-%d')
 
     # Data preprocessing
     sp_log['Date'] = pd.to_datetime(sp_log['Date'])

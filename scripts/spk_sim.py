@@ -1,7 +1,7 @@
 # Import necessary libraries.
 import numpy as np
 import pandas as pd
-from scipy.stats import poisson
+# from scipy.stats import poisson
 
 # Define a function to generate a random number of strikeouts for a given pitcher.
 def generate_strikeouts(pitcher):
