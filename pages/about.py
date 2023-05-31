@@ -35,23 +35,36 @@ def app():
 
     **Roadmap:** Future iterations of the app
 
-    ### Approach Details (work in progress):
-    - scrape SP probables from two sites (Rotogrinders and BaseballPress)
-    - scrape team batting stats from Baseball Reference via pybaseball package
-    - scrape pitcher stats from Baseball Reference via pybaseball package
-    - calculate expected strikeout distributions for each pitcher
+    ### Approach Details (deatils a work in progress):
+    - scrape probable starting pitchers from Rotogrinders and BaseballPress
+    - scrape left and right team heandedness batting stats from MLB.com
+    - scrape previous day pitcher stat lines from Baseball Reference
     - use API to pull over / under prop bets from FanDuel
-    - calculate expected value for each pitcher
-    - create a streamlit app to display the data
+    - use pybaseball to return pitcher stats for each probable starting pitcher
+    - run calculation based on SP K%, SP average inning pitched, SP average batters faced per inning and normalized team handedness K%
+    - calculate expected strikeout Poisson distributions for each pitcher
+    - caculate sum of over or under Poisson distributions for each pitcher based on prop bet line
+    - compare expected value to prop bet line over or under
+    - identify over and under bets with most exepected value
+    - use expected Ks data to simulate 10000 games and determine moneyline odds for pitcher with most Ks on the day
+    - update yesterday's results from Baseball Reference stat line log
+    - connect data to Streamlit to display all data which runs from GitHub repo
+    - integrate PythonAnywhere to run scripts daily and update app (including pulling and pushing to GitHub)
 
     ### Data Sources:
     - [Baseball Reference](https://www.baseball-reference.com/)
     - [FanDuel](https://www.fanduel.com/)
+    - [MLB](https://www.mlb.com/)
     - [Rotogrinders](https://rotogrinders.com/)
     - [Baseball Press](https://www.baseballpress.com/)
     - [PyBaseball](https://pypi.org/project/pybaseball/)
     - [Baseball Savant](https://baseballsavant.mlb.com/)
     - [Odds API](https://the-odds-api.com/)
+    - [Streamlit](https://streamlit.io/)
+    - [PythonAnywhere](https://www.pythonanywhere.com/)
+
+    ### GitHub Repo:
+    [SPK Repo](https://github.com/amaizehayes/sp-k-prediction-app)
     """
     st.header("About Page")
     st.markdown(abtmkdwn)
