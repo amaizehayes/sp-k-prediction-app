@@ -181,9 +181,9 @@ if __name__ == '__main__':
     try:
         sp_prop_odds = get_current_day_odds(API_KEY, SPORT, REGIONS, MARKETS, PROPMARKETS, ODDS_FORMAT, DATE_FORMAT, BOOKMAKERS)
         #return today's odds into a csv file
-        sp_prop_odds.to_csv('sp-k-prediction-app/output/sp_prop_odds_today.csv', index=False, header=True)
+        sp_prop_odds.to_csv('output/sp_prop_odds_today.csv', index=False, header=True)
         #append today's odds to the history file
-        sp_prop_odds.to_csv('sp-k-prediction-app/output/sp_prop_odds_history.csv', index=False, header=False, mode='a')
+        sp_prop_odds.to_csv('output/sp_prop_odds_history.csv', index=False, header=False, mode='a')
     except Exception as e:
         print(e)
 

@@ -47,12 +47,12 @@ def simulate_day(num_iterations):
 
 
 if __name__ == '__main__':
-  pitching_stats_df = pd.read_csv('sp-k-prediction-app/output/spk_today.csv')
+  pitching_stats_df = pd.read_csv('output/spk_today.csv')
 
   # Simulate a day of baseball and print the results.
   df = simulate_day(10000)
 
-  df.to_csv('sp-k-prediction-app/spk_sim.csv', index=False, header=True)
+  df.to_csv('spk_sim.csv', index=False, header=True)
 
   print(df)
 
