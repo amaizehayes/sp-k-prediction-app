@@ -53,14 +53,15 @@ def scrape_and_save_data(url, output_file):
 
     standf.to_csv(output_file, index=False)
 
+
 if __name__ == '__main__':
     # Scrape the data
     url_l = "https://www.mlb.com/stats/team/batting-average?split=vl"
-    output_l = "output/mlb_team_k_vs_l.csv"
+    output_l = "sp-k-prediction-app/output/mlb_team_k_vs_l.csv"
     scrape_and_save_data(url_l, output_l)
 
     url_r = "https://www.mlb.com/stats/team/batting-average?split=vr"
-    output_r = "output/mlb_team_k_vs_r.csv"
+    output_r = "sp-k-prediction-app/output/mlb_team_k_vs_r.csv"
     scrape_and_save_data(url_r, output_r)
 
     # Print the number of probable starters scraped

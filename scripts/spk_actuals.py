@@ -32,8 +32,8 @@ def evaluate_regression_metrics(df):
 
 def main():
     # Load data
-    sp_log = load_data('output/sp_log_2023.csv')
-    spk_history = load_data('output/spk_history.csv')
+    sp_log = load_data('sp-k-prediction-app/output/sp_log_2023.csv')
+    spk_history = load_data('sp-k-prediction-app/output/spk_history.csv')
 
     if sp_log is None or spk_history is None:
         return print('Nothing getting passed')
@@ -60,8 +60,8 @@ def main():
     df['SO'] = df['SO'].astype(int)
     df.sort_values(by='SO', ascending=False, inplace=True)
     df.reset_index(drop=True, inplace=True)
-    df.to_csv('spk_yesterday_results.csv', index=False, header=True)
-    df.to_csv('output/spk_results_history.csv', index=False, header=False, mode='a')
+    df.to_csv('sp-k-prediction-app/spk_yesterday_results.csv', index=False, header=True)
+    df.to_csv('sp-k-prediction-app/output/spk_results_history.csv', index=False, header=False, mode='a')
 
     # Evaluate regression metrics
     evaluate_regression_metrics(df)

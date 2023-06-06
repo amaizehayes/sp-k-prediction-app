@@ -48,7 +48,7 @@ def roto_sps():
     span_element = soup.select_one('#top > div > section > div > header > h1 > span')
     span_text = span_element.text.strip()
     date_str = span_text.split(' (')[0]
-    date_obj = datetime.strptime(date_str, '%B %d, %Y')
+    date_obj = datetime.strptime(date_str, '%b %d, %Y')
     date_string = date_obj.date().strftime('%Y-%m-%d')
 
     # Create a DataFrame from the list of tuples, with columns for Name, Handedness, Team, Opponent, and Date
@@ -113,8 +113,8 @@ def combine_scrapes(rg_df, bp_df):
     """
     Combines the RotoGrinders and Baseball Press DataFrames. Outputs 2 csvs.
     """
-    HISTORY_CSV = 'output/probable_starter_history.csv'
-    TODAY_CSV = 'output/probable_starter_today.csv'
+    HISTORY_CSV = 'sp-k-prediction-app/output/probable_starter_history.csv'
+    TODAY_CSV = 'sp-k-prediction-app/output/probable_starter_today.csv'
 
     df = pd.merge(rg_df, bp_df, on='Name', how='left')
 
@@ -130,7 +130,7 @@ def combine_scrapes(rg_df, bp_df):
     except Exception as e:
         print(e)
 
-    return len(df)
+    return len(df), df
 
 if __name__ == '__main__':
     # Scrape the data
