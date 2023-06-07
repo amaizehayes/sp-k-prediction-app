@@ -39,9 +39,12 @@ def simulate_day(num_iterations):
 
   # Calculate the moneyline for each pitcher.
   df['Moneyline'] = df['Percent'].apply(lambda x: int(round(100 / x - 100, -1)))
+  df['Moneyline'] = df['Moneyline'].astype(str)
+  df['Moneyline'] = df['Moneyline'].str.replace(',', '')
+  df['Moneyline'] = df['Moneyline'].apply(lambda x: '+' + x if int(x) > 0 else x)
 
   # Sort the DataFrame by the moneyline column.
-  df.sort_values('Moneyline', ascending=True, inplace=True)
+  df.sort_values('Percent', ascending=False, inplace=True)
 
   return df
 
