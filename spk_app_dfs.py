@@ -57,6 +57,8 @@ def app_dfs():
     df_spk_sim['Percent'] = df_spk_sim['Percent'].apply(to_percent)
     df_spk_sim.drop(columns=['Count'], inplace=True)
     df_spk_sim.rename(columns={'Percent': 'Probability'}, inplace=True)
+    df_spk_sim['Moneyline'] = df_spk_sim['Moneyline'].astype(str)
+    df_spk_sim['Moneyline'] = df_spk_sim['Moneyline'].apply(lambda x: '+' + x if int(x) > 0 else x)
 
     def plot_strikeout_distributions(df, fig_width=8, fig_height=10, n_cols=2):
         # Define the number of plots

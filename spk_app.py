@@ -41,24 +41,17 @@ formatted_datetime = time_since_last_import()
 today = date.today().strftime("%A, %B %d, %Y")
 
 def app():
-    tab1kd = """
-    #### Objective:
-    to showcase data science skills in creating a sports analytics app
-    #### Method:
-    - scrape SP probables from two sites (Rotogrinders and BaseballPress)
-    - scrape team batting stats from Baseball Reference via pybaseball package
-    - scrape pitcher stats from Baseball Reference via pybaseball package
-    - calculate expected strikeout distributions for each pitcher
-    - use API to pull over / under prop bets from FanDuel
-    - calculate expected value for each pitcher
-    - create a streamlit app to display the data
-    """
+
+    site_purpose = """*SP-K-Prediction identifies expected value in MLB starting pitcher strikeout bets*"""
+    games_today = f"For MLB games played on {today}"
+    last_update = f"Updated @ {formatted_datetime}"
 
     with tab1:
-        st.header("Starting Pitcher Expected Strikeouts (xK)")
-        st.text(f"For MLB games played on {today}")
-        st.text(f"Updated @ {formatted_datetime}")
+        st.write(site_purpose)
         st.markdown('First time here? Visit <a href="/about" target="_self">About</a> for more information', unsafe_allow_html=True)
+        st.subheader("Starting Pitcher Expected Strikeouts (xK)")
+        st.text(games_today)
+        st.text(last_update)
         with st.expander('Glossary & Methodology (Click to Expand)'):
             st.markdown("""
             - **xK**: expected number of strikeouts *(now accounts for handedness of the pitcher and the opposing team)*
@@ -67,9 +60,10 @@ def app():
             st.write('The expected number of strikeouts is calculated using pitcher stats and opponent team batting stats. A further explanation is coming.')
         st.dataframe(sp_df, height=700, width=1000)
     with tab2:
-        st.header("SP Expected Strikeout Distributions")
-        st.text(f"For MLB games played on {today}")
-        st.text(f"Updated @ {formatted_datetime}")
+        st.write(site_purpose)
+        st.subheader("SP Expected Strikeout Distributions")
+        st.text(games_today)
+        st.text(last_update)
         st.write('A Poisson distribution plot of the expected number of strikeouts per pitcher')
         with st.expander('Glossary & Methodology (Click to Expand)'):
             st.markdown("""
@@ -82,9 +76,10 @@ def app():
         st.pyplot(fig)
 
     with tab3:
-        st.header("Over/Under Bets")
-        st.text(f"For MLB games played on {today}")
-        st.text(f"Updated @ {formatted_datetime}")
+        st.write(site_purpose)
+        st.subheader("Over/Under Bets")
+        st.text(games_today)
+        st.text(last_update)
         with st.expander('Glossary & Methodology (Click to Expand)'):
             st.markdown("""
             - **Expected Value**: the difference between the expected percent likelihood vs. the prop bet percent likelihood
@@ -97,9 +92,10 @@ def app():
         st.subheader("Over Props")
         st.dataframe(df_over)
     with tab4:
-        st.header("Most Ks Odds")
-        st.text(f"For MLB games played on {today}")
-        st.text(f"Updated @ {formatted_datetime}")
+        st.write(site_purpose)
+        st.subheader("Most Ks Odds")
+        st.text(games_today)
+        st.text(last_update)
         st.write('The odds below are based on 10,000 simulations of the games being played today.')
         with st.expander('Glossary & Methodology (Click to Expand)'):
             st.markdown("""
@@ -109,11 +105,12 @@ def app():
             *Notice: Moneyline to be fixed for lines that should be negative*
             """)
 
-        st.dataframe(df_spk_sim)
+        st.table(df_spk_sim)
 
     with tab5:
-        st.header("Yesterday's SP K Results")
-        st.text(f"Updated @ {formatted_datetime}")
+        st.write(site_purpose)
+        st.subheader("Yesterday's SP K Results")
+        st.text(last_update)
         with st.expander('Glossary & Methodology (Click to Expand)'):
             st.markdown("""
             - **xK**: expected number of strikeouts *(now accounts for handedness of the pitcher and the opposing team)*
