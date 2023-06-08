@@ -38,7 +38,16 @@ def simulate_day(num_iterations):
   df['Percent'] = df['Count'] / num_iterations
 
   # Calculate the moneyline for each pitcher.
-  df['Moneyline'] = df['Percent'].apply(lambda x: int(round(100 / x - 100, -1)))
+  def percent_to_moneyline(percent):
+    if percent > 0.5:
+        return int(round((percent / (1 - percent)) * -100, -1))
+    elif percent < 0.5:
+        return int(round(((1 - percent) / percent) * 100, -1))
+    else:
+        return 0
+
+  # Calculate the moneyline for each pitcher.
+  df['Moneyline'] = df['Percent'].apply(percent_to_moneyline)
   df['Moneyline'] = df['Moneyline'].astype(str)
   df['Moneyline'] = df['Moneyline'].str.replace(',', '')
   df['Moneyline'] = df['Moneyline'].apply(lambda x: '+' + x if int(x) > 0 else x)
