@@ -25,7 +25,7 @@ def app():
     - use a ratio of 2022 and 2023 data for pitchers (use game logs at a future state)
     - fangraphs with -1 for some player ids. need to fix
     - pull in player specific game logs for 2022
-    - fix moneyline + sign and remove, from odds
+    - ~~fix moneyline + sign and remove, from odds~~
     - ~~add glossary and methodology for each tab/page~~
     """
     st.header("Roadmap")

@@ -1,11 +1,11 @@
-# import pandas as pd
-# import numpy as np
+import pandas as pd
+import numpy as np
 from datetime import date, datetime, timedelta
 import pytz
-# import random
-# import math
-# import seaborn as sns
-# import matplotlib.pyplot as plt
+import random
+import math
+import seaborn as sns
+import matplotlib.pyplot as plt
 import streamlit as st
 import os
 import spk_app_dfs
@@ -41,10 +41,17 @@ formatted_datetime = time_since_last_import()
 today = date.today().strftime("%A, %B %d, %Y")
 
 def app():
+    # CSS to inject contained in a string
+    hide_table_row_index = """
+                <style>
+                thead tr th:first-child {display:none}
+                tbody th {display:none}
+                </style>
+                """
 
-    site_purpose = """*SP-K-Prediction identifies expected value in MLB starting pitcher strikeout bets*"""
-    games_today = f"For MLB games played on {today}"
-    last_update = f"Updated @ {formatted_datetime}"
+    site_purpose = """*SP-K-Prediction identifies positive expected value in MLB starting pitcher strikeout bets*"""
+    games_today = f"For {today}"
+    last_update = f"Updated: {formatted_datetime}"
 
     with tab1:
         st.write(site_purpose)
@@ -58,7 +65,7 @@ def app():
             - **prop_k**: FanDuel over / under prop bet for strikeouts
             """)
             st.write('The expected number of strikeouts is calculated using pitcher stats and opponent team batting stats. A further explanation is coming.')
-        st.dataframe(sp_df, height=700, width=1000)
+        st.dataframe(sp_df, height=700, width=1000, hide_index=True)
     with tab2:
         st.write(site_purpose)
         st.subheader("SP Expected Strikeout Distributions")
@@ -88,9 +95,9 @@ def app():
             - **more to come**
             """)
         st.subheader("Under Props")
-        st.dataframe(df_under)
+        st.dataframe(df_under, hide_index=True)
         st.subheader("Over Props")
-        st.dataframe(df_over)
+        st.dataframe(df_over, hide_index=True)
     with tab4:
         st.write(site_purpose)
         st.subheader("Most Ks Odds")
@@ -102,9 +109,8 @@ def app():
             - **Probability**: the percent likelihood of the pitcher having the most strikeouts out of 10k simulations
             - **Moneyline**: the moneyline odds for the pitcher to have the most strikeouts in 10k simulations
             - **more to come**
-            *Notice: Moneyline to be fixed for lines that should be negative*
             """)
-
+        st.markdown(hide_table_row_index, unsafe_allow_html=True)
         st.table(df_spk_sim)
 
     with tab5:
@@ -119,7 +125,7 @@ def app():
             - **IP**: the amount of innings pitched a starter pitcher had yesterday
             - **more to come**
             """)
-        st.dataframe(df_results, height=900)
+        st.dataframe(df_results, height=900, hide_index=True)
 
 
 if __name__ == '__main__':

@@ -53,6 +53,9 @@ def app_dfs():
 
     df_over = df_over[['Name', 'Team', 'Opponent', 'xK', 'prop_k', 'over', 'expected value',  'over_odds', 'x_over']]
     df_under = df_under[['Name', 'Team', 'Opponent', 'xK', 'prop_k', 'under', 'expected value', 'under_odds', 'x_under']]
+
+    df_over.rename(columns={'Name': 'Pitcher', 'over_odds': 'over %', 'x_over': 'xOver %'}, inplace=True)
+    df_under.rename(columns={'Name': 'Pitcher', 'under_odds': 'under %', 'x_under': 'xUnder %'}, inplace=True)
     #sim updates
     df_spk_sim['Percent'] = df_spk_sim['Percent'].apply(to_percent)
     df_spk_sim.drop(columns=['Count'], inplace=True)
