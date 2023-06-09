@@ -17,7 +17,6 @@ class BaseballScraper:
         function that scrapes bf for data for a given date
         '''
         url = f'https://www.baseball-reference.com/leagues/daily.fcgi?request=1&type=p&dates=yesterday&lastndays=7&since=2023-03-01&fromandto=2023-04-01.{self.date_str}&level=mlb&franch=ANY&stat=p%3AGS&stat_value=1'
-
         # bf_table_headers = []
         col_len = len(self.pitching_log_headers)
 
