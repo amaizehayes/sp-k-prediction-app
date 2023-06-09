@@ -14,19 +14,18 @@ st.set_page_config(
 )
 
 def app():
-    # with st.sidebar:
-    #     st.write('test')
-    #### mark down test here
     mkdown = """
     #### Future Iterations:
     - ~~use handedness for team strikeouts, requires manual scrape from FanGraphs~~
-    - update historical data based on game logs (fix logs for April games)
+    - ~~fix moneyline + sign and remove, from odds~~
+    - ~~add glossary and methodology for each tab/page~~
     - ~~move scripts to the cloud via PythonAnywhere~~
+    - update historical data based on game logs (fix logs for April games)
     - use a ratio of 2022 and 2023 data for pitchers (use game logs at a future state)
     - fangraphs with -1 for some player ids. need to fix
     - pull in player specific game logs for 2022
-    - ~~fix moneyline + sign and remove, from odds~~
-    - ~~add glossary and methodology for each tab/page~~
+    - create historical record for expected value prop bets, with $$ won/lost
+    - record closing line value for prop bets
     """
     st.header("Roadmap")
     st.markdown(mkdown)

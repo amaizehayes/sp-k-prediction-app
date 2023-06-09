@@ -117,6 +117,7 @@ def app():
         st.write(site_purpose)
         st.subheader("Yesterday's SP K Results")
         st.text(last_update)
+        st.markdown("""*If table is empty, BaseballReference did not update*""")
         with st.expander('Glossary & Methodology (Click to Expand)'):
             st.markdown("""
             - **xK**: expected number of strikeouts *(now accounts for handedness of the pitcher and the opposing team)*
