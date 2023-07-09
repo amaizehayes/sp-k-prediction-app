@@ -15,11 +15,13 @@ def clean_pyb_data(df):
 
 def calculate_avg_ip(df, avg_ip):
     def pitch_avg_ip(row):
-        if row['GS'] == 0 or row['IP'] / row['GS'] >= 6.5:
-            return avg_ip * 0.95  # 0.95 arbitrary number to account for relievers or those with little SP history
+        if row['Name'] in ['Sandy Alcantara', 'Framber Valdez']:
+            return row['IP'] / row['GS']
+        elif row['GS'] == 0 or row['IP'] / row['GS'] >= 6.67 or row['IP'] <= 100:
+            # return avg_ip * 0.95  # 0.95 arbitrary number to account for relievers or those with little SP history
+            return avg_ip #moving to this
         else:
             return row['IP'] / row['GS']
-
     df['avgIP'] = df.apply(pitch_avg_ip, axis=1)
     df.dropna(inplace=True)
     print('avgIP calculated')
