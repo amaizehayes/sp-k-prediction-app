@@ -45,7 +45,7 @@ def merge_data(prob_sp_start, df, fg_sp_data, team_bat_l, team_bat_r, mlb_k_avg_
 
     sp_pyb_merge = pd.merge(sp_df_merge, df, left_on='key_fangraphs', right_on='IDfg', how='left')
     # sp_pyb_merge.drop(columns=['RGID', 'mlbid', 'brefid', 'key_fangraphs', 'IDfg', 'Name_y'], inplace=True)
-    sp_pyb_merge.drop(columns=['RGID', 'mlbid', 'brefid', 'key_fangraphs', 'IDfg', 'Name_y'], inplace=True)
+    sp_pyb_merge.drop(columns=['RGID', 'mlbid', 'key_fangraphs', 'IDfg', 'Name_y'], inplace=True)
     sp_pyb_merge = sp_pyb_merge.rename(columns={'Name_x': 'Name'})
 
     sp_pyb_merge['BF/IP'] = sp_pyb_merge['TBF'] / sp_pyb_merge['IP']
