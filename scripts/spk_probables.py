@@ -109,14 +109,46 @@ def baseball_press():
     print('Baseball Press scrape successful.')
     return bp_df
 
-def combine_scrapes(rg_df, bp_df):
+def mlb_data():
+
+    # Define constants
+    url = 'https://www.mlb.com/probable-pitchers'
+
+    response = requests.get(url)
+
+    soup = bs4.BeautifulSoup(response.text, 'html.parser')
+    player_links = soup.select('.probable-pitchers__pitcher-name-link')
+    lc = []
+
+    for pitcher_div in player_links:
+        pitcher_name = pitcher_div.text.strip()
+        pitcher_id = pitcher_div['href'].split('-')[-1]
+        lc.append([pitcher_name, pitcher_id])
+
+    # Create a DataFrame from the list of tuples, with columns for Name, mlbid and brefid
+    mlb_df = pd.DataFrame(lc, columns=['Name', 'mlbid'])
+
+    def remove_middle_initial(name):
+        if re.search(r'\b\w\.\s*[A-Z]\.\s*[A-Z]', name):
+            return name
+        else:
+            return re.sub(r"\b\w\.\s*", "", name)
+
+    mlb_df['Name'] = mlb_df['Name'].apply(remove_middle_initial)
+
+    # Return the number of probable starters scraped
+    print('Baseball Press scrape successful.')
+    return mlb_df
+
+
+def combine_scrapes(rg_df, mlb_df):
     """
     Combines the RotoGrinders and Baseball Press DataFrames. Outputs 2 csvs.
     """
     HISTORY_CSV = 'sp-k-prediction-app/output/probable_starter_history.csv'
     TODAY_CSV = 'sp-k-prediction-app/output/probable_starter_today.csv'
 
-    df = pd.merge(rg_df, bp_df, on='Name', how='left')
+    df = pd.merge(rg_df, mlb_df, on='Name', how='left')
 
     # Write the DataFrame to the history CSV file
     try:
@@ -134,7 +166,7 @@ def combine_scrapes(rg_df, bp_df):
 
 if __name__ == '__main__':
     # Scrape the data
-    combo_scrape = combine_scrapes(roto_sps(), baseball_press())
+    combo_scrape = combine_scrapes(roto_sps(), mlb_data())
 
     # Print the number of probable starters scraped
     print(f'{combo_scrape} probable starters scraped successfully.')
