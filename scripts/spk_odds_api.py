@@ -168,8 +168,9 @@ def get_current_day_odds(api_key, sport, regions, markets, propmarkets, odds_for
     return df
 
 if __name__ == '__main__':
-    API_KEY = 'edbcea9d1c4dd9fb281dd8d884eaedd6'
+    API_KEY = '78631749ab3c6ebcb3af78400a36298b'
     #backup 78631749ab3c6ebcb3af78400a36298b
+    # edbcea9d1c4dd9fb281dd8d884eaedd6
     SPORT = 'baseball_mlb'
     REGIONS = 'us'
     MARKETS = 'h2h'
