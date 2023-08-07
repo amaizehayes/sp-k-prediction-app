@@ -1,5 +1,5 @@
 import streamlit as st
-
+import pandas as pd
 st.set_page_config(
     page_title="SP K Roadmap",
     page_icon="⚾",
@@ -14,10 +14,8 @@ st.set_page_config(
 )
 
 
-import pandas as pd
-
 # dist_df = pd.read_csv('/Users/patrick/Downloads/spk_viz_data.csv')
-dist_df = pd.read_csv('sp-k-prediction-app/spk_viz_data.csv')
+dist_df = pd.read_csv('/sp-k-prediction-app/spk_viz_data.csv')
 
 dist_df.drop(columns=['prop_k', 'x_under', 'x_over', 'over', 'under'], inplace=True)
 
@@ -101,7 +99,7 @@ dist_df['xPropTieml'] = dist_df['xPropTie%'].apply(convert_percentage_odds_to_mo
 # dist_df['xProp+1Oml'] = dist_df['xProp+1O%'].apply(convert_percentage_odds_to_moneyline_with_vig_rounded)
 
 cols = ['Name',
- 'Handedness',
+#  'Handedness',
  'Team',
  'Opponent',
  'xK',
@@ -138,18 +136,20 @@ results_df = pd.DataFrame(results)
 
 # print(results_df)
 
+
+
+
+min_u_x_u = results_df['UxU'].idxmin()
+min_u_x_o = results_df['UxO'].idxmin()
+min_o_x_u = results_df['OxU'].idxmin()
+min_o_x_o = results_df['OxO'].idxmin()
+
 lowest_df = pd.DataFrame([
     results_df.loc[min_u_x_u],
     results_df.loc[min_u_x_o],
     results_df.loc[min_o_x_u],
     results_df.loc[min_o_x_o]
 ])
-
-
-# min_u_x_u = results_df['UxU'].idxmin()
-# min_u_x_o = results_df['UxO'].idxmin()
-# min_o_x_u = results_df['OxU'].idxmin()
-# min_o_x_o = results_df['OxO'].idxmin()
 
 # # Print the player names corresponding to the lowest values
 # print("Lowest UxU value:", results_df.loc[min_u_x_u, 'Player'], results_df.loc[min_u_x_u, 'OtherPlayer'], results_df.loc[min_u_x_u, 'UxU'])
@@ -167,7 +167,7 @@ def app():
     st.header("xK Prop Parlay")
     st.dataframe(dist_df, height=900, hide_index=True)
     st.subheader("Parlays with Best Odds")
-    st.dataframe(lowest_df, height=900, hide_index=True)
+    st.dataframe(lowest_df, height=200, hide_index=True)
     st.subheader("All parlay variation odds")
     st.dataframe(results_df, height=900, hide_index=True)
     # st.markdown(mkdown)
