@@ -17,7 +17,7 @@ st.set_page_config(
 # dist_df = pd.read_csv('/Users/patrick/Downloads/spk_viz_data.csv')
 dist_df = pd.read_csv('/sp-k-prediction-app/spk_viz_data.csv')
 
-dist_df.drop(columns=['prop_k', 'x_under', 'x_over', 'over', 'under'], inplace=True)
+# dist_df.drop(columns=['prop_k', 'x_under', 'x_over', 'over', 'under'], inplace=True)
 
 def calculate_sum_poisson_range_col(row, col):
     if row[col] % 1 == 0.5:
