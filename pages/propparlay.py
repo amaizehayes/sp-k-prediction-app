@@ -134,7 +134,7 @@ for index1, player1 in dist_df.iterrows():
 
 results_df = pd.DataFrame(results)
 
-# print(results_df)
+print(results_df)
 
 
 
@@ -151,11 +151,11 @@ lowest_df = pd.DataFrame([
     results_df.loc[min_o_x_o]
 ])
 
-# # Print the player names corresponding to the lowest values
-# print("Lowest UxU value:", results_df.loc[min_u_x_u, 'Player'], results_df.loc[min_u_x_u, 'OtherPlayer'], results_df.loc[min_u_x_u, 'UxU'])
-# print("Lowest UxO value:", results_df.loc[min_u_x_o, 'Player'], results_df.loc[min_u_x_o, 'OtherPlayer'], results_df.loc[min_u_x_o, 'UxO'])
-# print("Lowest OxU value:", results_df.loc[min_o_x_u, 'Player'], results_df.loc[min_o_x_u, 'OtherPlayer'], results_df.loc[min_o_x_u, 'OxU'])
-# print("Lowest OxO value:", results_df.loc[min_o_x_o, 'Player'], results_df.loc[min_o_x_o, 'OtherPlayer'], results_df.loc[min_o_x_o, 'OxO'])
+# Print the player names corresponding to the lowest values
+print("Lowest UxU value:", results_df.loc[min_u_x_u, 'Player'], results_df.loc[min_u_x_u, 'OtherPlayer'], results_df.loc[min_u_x_u, 'UxU'])
+print("Lowest UxO value:", results_df.loc[min_u_x_o, 'Player'], results_df.loc[min_u_x_o, 'OtherPlayer'], results_df.loc[min_u_x_o, 'UxO'])
+print("Lowest OxU value:", results_df.loc[min_o_x_u, 'Player'], results_df.loc[min_o_x_u, 'OtherPlayer'], results_df.loc[min_o_x_u, 'OxU'])
+print("Lowest OxO value:", results_df.loc[min_o_x_o, 'Player'], results_df.loc[min_o_x_o, 'OtherPlayer'], results_df.loc[min_o_x_o, 'OxO'])
 
 
 
