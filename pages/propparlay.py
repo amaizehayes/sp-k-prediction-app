@@ -17,7 +17,7 @@ st.set_page_config(
 import pandas as pd
 
 # dist_df = pd.read_csv('/Users/patrick/Downloads/spk_viz_data.csv')
-dist_df = pd.read_csv('sp-k-prediction-app/spk_viz_data.csv')
+dist_df = pd.read_csv('spk_viz_data.csv')
 
 dist_df.drop(columns=['prop_k', 'x_under', 'x_over', 'over', 'under'], inplace=True)
 
