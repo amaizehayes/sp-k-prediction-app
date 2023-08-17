@@ -7,11 +7,25 @@ import json
 
 warnings.filterwarnings('ignore')
 
+# def clean_pyb_data(df):
+#     cols = ['IDfg', 'Name', 'GS', 'IP', 'TBF', 'K%']
+#     new_df = df[cols]
+#     print('pyb data grabbed')
+#     return new_df
+
+#below for fangraphs issue
 def clean_pyb_data(df):
-    cols = ['IDfg', 'Name', 'GS', 'IP', 'TBF', 'K%']
-    new_df = df[cols]
-    print('pyb data grabbed')
-    return new_df
+    try:
+        cols = ['IDfg', 'Name', 'GS', 'IP', 'TBF', 'K%']
+        new_df = df[cols]
+        print('pyb data grabbed')
+        return new_df
+    except:
+        df = df.rename(columns={'PlayerId': 'IDfg'})
+        cols = ['IDfg', 'Name', 'GS', 'IP', 'TBF', 'K%']
+        new_df = df[cols]
+        print('pyb data grabbed')
+        return new_df
 
 def calculate_avg_ip(df, avg_ip):
     def pitch_avg_ip(row):
@@ -176,6 +190,9 @@ if __name__ == "__main__":
 
     # Clean and process data
     df = pyb.pitching_stats(2022, 2023, qual=1, split_seasons=0)
+    if len(df) == 0:
+        df = pd.read_csv('sp-k-prediction-app/output/pitchingexport.csv')
+        print("pyb didn't work, using csv")
     df = clean_pyb_data(df)
     df = calculate_avg_ip(df, avg_ip)
     all_merged_df = merge_data(prob_sp_start, df, fg_sp_data, team_bat_l, team_bat_r, mlb_k_avg_l, mlb_k_avg_r)
