@@ -38,7 +38,17 @@ def time_since_last_import():
 formatted_datetime = time_since_last_import()
 
 # Get the current date and format it as a string
-today = date.today().strftime("%A, %B %d, %Y")
+
+# today = date.today().strftime("%A, %B %d, %Y")
+
+# Get the current datetime
+current_datetime = datetime.now()
+
+# Adjust for the 4-hour difference
+adjusted_datetime = current_datetime - timedelta(hours=4)
+
+# Format the adjusted datetime
+today = adjusted_datetime.strftime("%A, %B %d, %Y")
 
 def app():
     # CSS to inject contained in a string
